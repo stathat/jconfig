@@ -4,7 +4,7 @@ jconfig
 This is a Go package to parse a configuration file using JSON.
 
 It's really simple and does nothing fancy.  We wouldn't have bothered releasing it
-except that a few other projects we will be using depend on it.
+except that a few other projects we will be releasing depend on it.
 
 Installation
 ------------
