@@ -10,7 +10,7 @@ package jconfig
 
 import (
 	"bytes"
-	"json"
+	"encoding/json"
 	"log"
 	"os"
 )
@@ -47,7 +47,23 @@ func LoadConfigString(s string) *Config {
 	return result
 }
 
-func (c *Config) parse() os.Error {
+func (c *Config) StringMerge(s string) {
+	next := LoadConfigString(s)
+	c.merge(next.data)
+}
+
+func (c *Config) LoadMerge(filename string) {
+	next := LoadConfig(filename)
+	c.merge(next.data)
+}
+
+func (c *Config) merge(ndata map[string]interface{}) {
+	for k, v := range ndata {
+		c.data[k] = v
+	}
+}
+
+func (c *Config) parse() error {
 	f, err := os.Open(c.filename)
 	if err != nil {
 		return err
@@ -82,6 +98,24 @@ func (c *Config) GetInt(key string) int {
 		return -1
 	}
 	return int(x.(float64))
+}
+
+// Returns a float for the config variable key
+func (c *Config) GetFloat(key string) float64 {
+	x, ok := c.data[key]
+	if !ok {
+		return -1
+	}
+	return x.(float64)
+}
+
+// Returns a bool for the config variable key
+func (c *Config) GetBool(key string) bool {
+	x, ok := c.data[key]
+	if !ok {
+		return false
+	}
+	return x.(bool)
 }
 
 // Returns an array for the config variable key
