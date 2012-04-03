@@ -9,9 +9,9 @@ except that a few other projects we will be releasing depend on it.
 Installation
 ------------
 
-Use `goinstall`:
+Use `go install`:
 
-    goinstall github.com/stathat/jconfig
+    go install github.com/stathat/jconfig
 
 If you are building your code with `goinstall`, you can skip the previous step and just
 import `jconfig` as follows:
