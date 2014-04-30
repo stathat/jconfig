@@ -126,3 +126,12 @@ func (c *Config) GetArray(key string) []interface{} {
 	}
 	return result.([]interface{})
 }
+
+// Returns an map for the config variable key
+func (c *Config) GetMap(key string) map[string]interface{} {
+	result, present := c.data[key]
+	if !present {
+		return map[string]interface{}(nil)
+	}
+	return result.(map[string]interface{})
+}
