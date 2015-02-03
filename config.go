@@ -26,6 +26,12 @@ func newConfig() *Config {
 	return result
 }
 
+func newConfigFromValue(v map[string]interface{}) *Config {
+	result := new(Config)
+	result.data = v
+	return result
+}
+
 // Loads config information from a JSON file
 func LoadConfig(filename string) *Config {
 	result := newConfig()
@@ -125,4 +131,13 @@ func (c *Config) GetArray(key string) []interface{} {
 		return []interface{}(nil)
 	}
 	return result.([]interface{})
+}
+
+// Returns an object value as Config
+func (c *Config) GetConfig(key string) *Config {
+	v, exists := c.data[key]
+	if !exists {
+		return nil
+	}
+	return newConfigFromValue(v.(map[string]interface{}))
 }
