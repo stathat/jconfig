@@ -55,3 +55,20 @@ func TestConfigMerge(t *testing.T) {
 		t.Errorf("expected vier, got %s:", c.GetString("four"))
 	}
 }
+
+func TestGetConfig(t *testing.T) {
+	c := LoadConfigString(`{"one":{"two":1,"three":"zwei"}}`)
+	if c == nil {
+		t.Fatalf("expected a config object")
+	}
+	subc := c.GetConfig("one")
+	if subc == nil {
+		t.Fatalf("expected sub-config object")
+	}
+	if subc.GetInt("two") != 1 {
+		t.Fatalf("expected int in sub-config")
+	}
+	if subc.GetString("three") != "zwei" {
+		t.Fatalf("expected string in sub-config")
+	}
+}
