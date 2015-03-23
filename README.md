@@ -9,29 +9,24 @@ except that a few other projects we will be releasing depend on it.
 Installation
 ------------
 
-Use `go install`:
-
-    go install github.com/stathat/jconfig
-
-If you are building your code with `goinstall`, you can skip the previous step and just
-import `jconfig` as follows:
+    go get stathat.com/c/jconfig
 
     import (
-            "github.com/stathat/jconfig"
+            "stathat.com/c/jconfig"
     )
 
 Usage
 -----
 
-Examples available at [www.stathat.com/src/jconfig](http://www.stathat.com/src/jconfig).
+Examples available at [www.stathat.com/c/jconfig](http://www.stathat.com/c/jconfig).
 
 Contact us
 ----------
 
 We'd love to hear from you if you are using this in your projects!  Please drop us a
-line: [@stat_hat](http://twitter.com/stat_hat) or [contact us here](http://www.stathat.com/docs/contact).
+line: [@stathat](http://twitter.com/stathat) or [contact us here](http://www.stathat.com/docs/contact).
 
 About
 -----
 
-Written by Patrick Crosby at [StatHat](http://www.stathat.com).  Twitter:  [@stat_hat](http://twitter.com/stat_hat)
+Written by Patrick Crosby at [StatHat](http://www.stathat.com).  Twitter:  [@stathat](http://twitter.com/stathat)
