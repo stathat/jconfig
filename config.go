@@ -16,13 +16,13 @@ import (
 )
 
 type Config struct {
-	data     map[string]interface{}
+	Data     map[string]interface{}
 	filename string
 }
 
 func newConfig() *Config {
 	result := new(Config)
-	result.data = make(map[string]interface{})
+	result.Data = make(map[string]interface{})
 	return result
 }
 
@@ -40,7 +40,7 @@ func LoadConfig(filename string) *Config {
 // Loads config information from a JSON string
 func LoadConfigString(s string) *Config {
 	result := newConfig()
-	err := json.Unmarshal([]byte(s), &result.data)
+	err := json.Unmarshal([]byte(s), &result.Data)
 	if err != nil {
 		log.Fatalf("error parsing config string %s: %s", s, err)
 	}
@@ -49,17 +49,17 @@ func LoadConfigString(s string) *Config {
 
 func (c *Config) StringMerge(s string) {
 	next := LoadConfigString(s)
-	c.merge(next.data)
+	c.Merge(next.Data)
 }
 
 func (c *Config) LoadMerge(filename string) {
 	next := LoadConfig(filename)
-	c.merge(next.data)
+	c.Merge(next.Data)
 }
 
-func (c *Config) merge(ndata map[string]interface{}) {
-	for k, v := range ndata {
-		c.data[k] = v
+func (c *Config) Merge(nData map[string]interface{}) {
+	for k, v := range nData {
+		c.Data[k] = v
 	}
 }
 
@@ -74,7 +74,7 @@ func (c *Config) parse() error {
 	if err != nil {
 		return err
 	}
-	err = json.Unmarshal(b.Bytes(), &c.data)
+	err = json.Unmarshal(b.Bytes(), &c.Data)
 	if err != nil {
 		return err
 	}
@@ -84,7 +84,7 @@ func (c *Config) parse() error {
 
 // Returns a string for the config variable key
 func (c *Config) GetString(key string) string {
-	result, present := c.data[key]
+	result, present := c.Data[key]
 	if !present {
 		return ""
 	}
@@ -93,7 +93,7 @@ func (c *Config) GetString(key string) string {
 
 // Returns an int for the config variable key
 func (c *Config) GetInt(key string) int {
-	x, ok := c.data[key]
+	x, ok := c.Data[key]
 	if !ok {
 		return -1
 	}
@@ -102,7 +102,7 @@ func (c *Config) GetInt(key string) int {
 
 // Returns a float for the config variable key
 func (c *Config) GetFloat(key string) float64 {
-	x, ok := c.data[key]
+	x, ok := c.Data[key]
 	if !ok {
 		return -1
 	}
@@ -111,7 +111,7 @@ func (c *Config) GetFloat(key string) float64 {
 
 // Returns a bool for the config variable key
 func (c *Config) GetBool(key string) bool {
-	x, ok := c.data[key]
+	x, ok := c.Data[key]
 	if !ok {
 		return false
 	}
@@ -120,7 +120,7 @@ func (c *Config) GetBool(key string) bool {
 
 // Returns an array for the config variable key
 func (c *Config) GetArray(key string) []interface{} {
-	result, present := c.data[key]
+	result, present := c.Data[key]
 	if !present {
 		return []interface{}(nil)
 	}

@@ -9,8 +9,8 @@ func TestConfigFromString(t *testing.T) {
 	if c == nil {
 		t.Fatalf("expected a config object")
 	}
-	if c.data == nil {
-		t.Fatalf("expected config object to have data")
+	if c.Data == nil {
+		t.Fatalf("expected config object to have Data")
 	}
 	if c.GetInt("one") != 1 {
 		t.Errorf("expected 1, got %d:", c.GetInt("one"))
